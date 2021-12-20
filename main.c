@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <time.h>
 #include <sys/time.h>
+#include "lv_drivers/indev/evdev.h"
 
 #define DISP_BUF_SIZE (128 * 1024)
 
@@ -15,7 +16,7 @@ int main(void)
 
     /*Linux frame buffer device init*/
     fbdev_init();
-
+    evdev_init();
     /*A small buffer for LittlevGL to draw the screen's content*/
     static lv_color_t buf[DISP_BUF_SIZE];
 
@@ -28,13 +29,28 @@ int main(void)
     lv_disp_drv_init(&disp_drv);
     disp_drv.draw_buf   = &disp_buf;
     disp_drv.flush_cb   = fbdev_flush;
-    disp_drv.hor_res    = 800;
-    disp_drv.ver_res    = 480;
+    disp_drv.hor_res    = 480;
+    disp_drv.ver_res    = 272;
     lv_disp_drv_register(&disp_drv);
 
+
+    /* Add the mouse (or touchpad) as input device
+    * Use the 'mouse' driver which reads the PC's mouse*/
+    evdev_init();
+    evdev_set_file("/dev/input/event2");
+    /* Set up touchpad input device interface */
+    lv_indev_drv_t indev_drv;
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
+    indev_drv.read_cb = evdev_read;
+    lv_indev_t *indev = lv_indev_drv_register(&indev_drv);
+
+    //lv_obj_t *cursor_img = lv_img_create(lv_scr_act());
+    //lv_img_set_src(cursor_img, LV_SYMBOL_OK);
+    //lv_indev_set_cursor(indev, cursor_img);
     /*Create a Demo*/
     lv_demo_widgets();
-
+    // lv_demo_music();
     /*Handle LitlevGL tasks (tickless mode)*/
     while(1) {
         lv_task_handler();
