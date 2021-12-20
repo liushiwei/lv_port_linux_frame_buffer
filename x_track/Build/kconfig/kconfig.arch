@@ -1,0 +1,132 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.txt.
+#
+
+#comment "Architecture Configuration"
+
+choice
+	prompt "Architecture"
+	help
+		Select Architecture
+	config ARM_ARCH
+		bool "arm"
+		help
+			ARM Architecture
+    config LINUX_X86_64
+		bool "linux_x86_64"
+		help
+			Linux x86_64 Architecture
+endchoice
+
+#comment "Chip Configuration"
+
+menu "Chip Vendor"
+    choice
+        prompt "Chip Vendor"
+        depends on ARM_ARCH
+        help
+            Select Chip types
+        config HISILICON
+            bool "Hisilicon"
+            help
+                Hisilicon CPU type
+        config SIGMASTAR
+            bool "Sigmastar"
+            help
+                Sigmastar CPU type
+        config ROCKCHIP
+            bool "Rockchip"
+            help
+                Rockchip CPU type
+        config ANYKA
+            bool "Anyka"
+            help
+                Anyka CPU type
+        config ALLWINNER
+            bool "Allwinner"
+            help
+                Allwinner CPU type
+    endchoice
+endmenu
+
+menu "Chip Type"
+    choice
+        prompt "Chip Type"
+        depends on ARM_ARCH
+        help
+            Select Chip types
+        config HI3516EV200
+            bool "Hi3516ev200"
+	    	depends on HISILICON
+            help
+                CPU is Single Core Cortex A7
+        config HI3556V100
+            bool "Hi3556v100"
+			depends on HISILICON
+            help
+                CPU is Dual Core Cortex A53 and Cortex A53
+        config HI3559V200
+            bool "Hi3559v200"
+			depends on HISILICON
+            help
+                CPU is Dual Core Cortex A7 and Cortex A7
+        config SSC325
+            bool "ssc325"
+			depends on SIGMASTAR
+            help
+                CPU is Single Core Cortex A7
+        config SSC335
+            bool "ssc335"
+			depends on SIGMASTAR
+            help
+                CPU is Single Core Cortex A7
+	config RV1109
+            bool "rv1109"
+			depends on ROCKCHIP
+            help
+                CPU is Single Core Cortex A7		
+	config AK3918EV331
+            bool "ak3918ev331"
+			depends on ANYKA
+            help
+                CPU is Single Core Cortex A7	
+	config R329
+            bool "r329"
+			depends on ALLWINNER
+            help
+                CPU is Single Core Cortex A53	                
+    endchoice
+endmenu
+
+menu "ToolChain"
+	choice
+		prompt "Cross Compiler"
+		depends on HISILICON || SIGMASTAR || ROCKCHIP || ANYKA || ALLWINNER
+		config CROSS_COMPILE_HISIV600
+			bool "arm-hisiv600-linux-"
+			depends on (HISILICON) && (HI3559V100 || HI3556V100)
+		config CROSS_COMPILE_HIMIX100
+			bool "arm-himix100-linux-"
+			depends on (HISILICON) && (HI3559V200 || HI3556V200 || HI3516EV200)
+		config CROSS_COMPILE_UCLIBC_HARD_FLOAT
+			bool "arm-buildroot-linux-uclibcgnueabihf-"
+			depends on (SIGMASTAR) && (SSC325 || SSC335)
+		config CROSS_COMPILE_RV_UCLIBC_HARD_FLOAT
+			bool "arm-buildroot-linux-uclibcgnueabihf-"
+			depends on (ROCKCHIP) && (RV1109)
+		config CROSS_COMPILE_ANYKA_UCLIBC_HARD_FLOAT
+			bool "arm-anykav500-linux-uclibcgnueabi-"
+			depends on (ANYKA) && (AK3918EV331)
+        config CROSS_COMPILE_AARCH64_OPENWRT
+			bool "aarch64-openwrt-linux-"
+			depends on (ALLWINNER) && (R329)
+	endchoice
+    choice
+		prompt "GNU"
+		depends on LINUX_X86 || LINUX_X86_64
+        config CROSS_COMPILE_GNU
+			bool "gnu"
+			depends on LINUX_X86 || LINUX_X86_64
+	endchoice
+endmenu

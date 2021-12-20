@@ -1,0 +1,45 @@
+#
+# Automatically generated file; DO NOT EDIT.
+# X-TRACK Configuration
+#
+CONFIG_ARM_ARCH=y
+# CONFIG_LINUX_X86_64 is not set
+
+#
+# Chip Vendor
+#
+CONFIG_HISILICON=y
+# CONFIG_SIGMASTAR is not set
+# CONFIG_ROCKCHIP is not set
+# CONFIG_ANYKA is not set
+# CONFIG_ALLWINNER is not set
+
+#
+# Chip Type
+#
+# CONFIG_HI3516EV200 is not set
+# CONFIG_HI3556V100 is not set
+CONFIG_HI3559V200=y
+
+#
+# ToolChain
+#
+CONFIG_CROSS_COMPILE_HIMIX100=y
+
+#
+# Build Configure
+#
+# CONFIG_DEBUG is not set
+CONFIG_RELEASE=y
+# CONFIG_LOG_FILE_ON is not set
+CONFIG_LOG_FILE_OFF=y
+
+#
+# Peripheral
+#
+# CONFIG_GALAXYCORE_GC2053 is not set
+# CONFIG_GALAXYCORE_GC2053CAR is not set
+# CONFIG_OMNIVISION_OV2735 is not set
+# CONFIG_SMART_SC2231 is not set
+# CONFIG_SOI_F37 is not set
+# CONFIG_SONY_IMX307 is not set

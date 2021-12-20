@@ -1,0 +1,44 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.txt.
+#
+
+#comment "Peripheral Configuration"
+
+menu "Peripheral"
+    choice
+        prompt "Sensor"
+        help
+            Select Sensor
+        config GALAXYCORE_GC2053
+            bool "galaxycore_gc2053"
+            depends on (HISILICON) && (HI3516EV200)
+            help
+                Galaxycore GC2053 Set
+        config GALAXYCORE_GC2053CAR
+            bool "galaxycore_gc2053car"
+            depends on (HISILICON) && (HI3516EV200)
+            help
+                Galaxycore GC2053CAR Set
+        config OMNIVISION_OV2735
+            bool "omnivision_ov2735"
+            depends on (HISILICON) && (HI3516EV200)
+            help
+                Omnivision OV2735 Set
+        config SMART_SC2231
+            bool "smart_sc2231"
+            depends on (HISILICON) && (HI3516EV200)
+            help
+                Smart SC2231 Set
+        config SOI_F37
+            bool "soi_f37"
+            depends on (HISILICON) && (HI3516EV200)
+            help
+                Soi F37 Set
+        config SONY_IMX307
+            bool "sony_imx307"
+            depends on (HISILICON) && (HI3516EV200)
+            help
+                Sony IMX307 Set
+    endchoice
+endmenu

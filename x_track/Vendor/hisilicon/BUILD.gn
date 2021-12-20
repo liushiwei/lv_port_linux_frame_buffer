@@ -1,0 +1,67 @@
+# Copyright (c) 2021 AlgoIdeas
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+group("hisilicon") {
+    print("Hisilicon " + chip_type)
+    if (chip_type == "hi3559v200") {
+        deps = [
+            "//Vendor/hisilicon/hi3559v200:hi3559v200"
+        ]
+    }
+}
+
+config("vendor_include") {
+    include_dirs = [
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_linux/hisyslink/datafifo/include",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/ndk/slave/include",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_linux/hisyslink/ipcmsg/include",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/middleware/common/include",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/middleware/linux/include",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_linux/mpp/include",
+        "//Vendor/hisilicon/hi3559v200/common/devmng/include",
+        "//Vendor/hisilicon/hi3559v200/common/playback/include",
+        "//Vendor/hisilicon/hi3559v200/common/storagemng/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/timedtask/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/hiflash/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/hilog/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/himd5/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/timestamp/include",
+        "//Vendor/hisilicon/hi3559v200/common/utils/queue/include",
+        "//Vendor/hisilicon/hi3559v200/common/system/include",
+        "//Vendor/hisilicon/hi3559v200/common/usb/include",
+        "//Vendor/hisilicon/hi3559v200/common/gpsmng/include",
+        "//Vendor/hisilicon/hi3559v200/hal/acc/include",
+        "//Vendor/hisilicon/hi3559v200/hal/common/include",
+        "//Vendor/hisilicon/hi3559v200/hal/gauge/include",
+        "//Vendor/hisilicon/hi3559v200/hal/gps/include",
+        "//Vendor/hisilicon/hi3559v200/hal/gps/src/common",
+        "//Vendor/hisilicon/hi3559v200/hal/key/include",
+        "//Vendor/hisilicon/hi3559v200/hal/led/include",
+        "//Vendor/hisilicon/hi3559v200/hal/screen/include",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_liteos/mpp/include"
+    ]
+}
+
+config("vendor_lib") {
+    lib_dirs = [
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/drivers/linux",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/middleware/linux/lib",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/middleware/common/log/lib",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_linux/mpp/lib",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/ndk/slave/lib",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/pub/linux",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_linux/hisyslink/ipcmsg/out/a7_linux",
+        "//Vendor/hisilicon/hi3559v200/prebuilt_libs/amp/a7_linux/hisyslink/datafifo/out/a7_linux"
+    ]
+}

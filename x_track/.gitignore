@@ -1,0 +1,19 @@
+# Default output dir
+Out
+Simulator/LVGL.Simulator/Output
+
+
+# global
+*.o
+*.d
+*.a
+*.pc
+
+# other
+.config
+.config.old
+Build/kconfig/mconf/mconf
+Build/kconfig/mconf/zconf.hash.c
+Build/kconfig/mconf/zconf.lex.c
+Build/kconfig/mconf/zconf.tab.c
+

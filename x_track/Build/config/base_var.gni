@@ -1,0 +1,35 @@
+# Copyright (c) 2021 AlgoIdeas
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Description: Define the global variables for all components
+declare_args() {
+    # Chip Vendor. Support vendor such as "hisilicon", "rockchip" "sigmastar" and so on. 
+    # If gcc compiler, this value is "".
+    chip_vendor = ""
+
+    # Chip Type. Support chip : "hi3556v100", "hi3559v200", "ssc325", "ssc335" and so on.
+    # Set to "" when compiling with the gcc compiler.
+    chip_type = ""
+
+    # Product Name.
+    product_name = ""
+
+    # Sensor Type.
+    sensor_type = ""
+
+    # Other Compiler Param.
+    build_compiler = ""
+    build_compiler_specified = ""
+    build_compiler_dir = ""
+}
+

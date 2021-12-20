@@ -1,0 +1,29 @@
+#
+# For a description of the syntax of this configuration file,
+# see Documentation/kbuild/kconfig-language.txt.
+#
+
+#comment "Vendor Configuration"
+
+choice
+	prompt "Vendor"
+	help
+		Select Vendor
+	config HISILICON
+		bool "Hisilicon"
+		help
+			Hisilicon Chip Set
+	config ROCKCHIP
+		bool "Rockchip"
+		help
+			Rockchip Chip Set
+	config SIGMASTAR
+		bool "Sigmastar"
+		help
+			Sigmastar Chip 
+	config ANYKA
+		bool "Anyka"
+		help
+			Anyka Chip Set
+endchoice
+

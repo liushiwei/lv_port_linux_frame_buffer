@@ -1,0 +1,10 @@
+#
+# For a description of the syntax of this configuration file,
+# see build/scripts/Documentation/kbuild/kconfig-language.txt.
+#
+mainmenu "X-TRACK Configuration"
+
+source Build/kconfig/kconfig.arch
+source Build/kconfig/kconfig.build
+source Build/kconfig/kconfig.peripheral
+#source Build/kconfig/kconfig.vendor

@@ -1,0 +1,232 @@
+# Copyright (c) 2021 AlgoIdeas.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+group("App") {
+    if (chip_type == "hi3559v200") {
+        deps = [
+            ":X-Track"
+        ]
+    }
+}
+
+executable("X-Track") {
+    sources = [
+        "//USER/App/Common/DataProc/DP_Recorder.cpp",
+        "//USER/App/Common/DataProc/DP_Clock.cpp",
+        "//USER/App/Common/DataProc/DP_SportStatus.cpp",
+        "//USER/App/Common/DataProc/DP_Storage.cpp",
+        "//USER/App/Common/DataProc/DP_MusicPlayer.cpp",
+        "//USER/App/Common/DataProc/DP_TzConv.cpp",
+        "//USER/App/Common/DataProc/DP_Power.cpp",
+        "//USER/App/Common/DataProc/DP_SysConfig.cpp",
+        "//USER/App/Common/DataProc/DP_TrackFilter.cpp",
+        "//USER/App/Common/DataProc/DataProc.cpp",
+        "//USER/App/Common/DataProc/DP_MAG.cpp",
+        "//USER/App/Common/DataProc/DP_GPS.cpp",
+        "//USER/App/Common/DataProc/DP_IMU.cpp",
+        "//USER/App/Utils/GPX_Parser/GPX_Parser.cpp",
+        "//USER/App/Utils/MapConv/MapConv.cpp",
+        "//USER/App/Utils/MapConv/TileSystem/TileSystem.cpp",
+        "//USER/App/Utils/lv_ext/lv_obj_ext_func.cpp",
+        "//USER/App/Utils/lv_ext/lv_label_anim_effect.cpp",
+        "//USER/App/Utils/Stream/Print.cpp",
+        "//USER/App/Utils/Stream/Stream.cpp",
+        "//USER/App/Utils/PageManager/PM_Base.cpp",
+        "//USER/App/Utils/PageManager/PM_Anim.cpp",
+        "//USER/App/Utils/PageManager/PM_State.cpp",
+        "//USER/App/Utils/PageManager/PM_Drag.cpp",
+        "//USER/App/Utils/PageManager/ResourceManager.cpp",
+        "//USER/App/Utils/PageManager/PM_Router.cpp",
+        "//USER/App/Utils/TileConv/TileConv.cpp",
+        "//USER/App/Utils/TrackFilter/TrackPointFilter.cpp",
+        "//USER/App/Utils/TrackFilter/TrackLineFilter.cpp",
+        "//USER/App/Utils/TonePlayer/TonePlayer.cpp",
+        "//USER/App/Utils/WString/WString.cpp",
+        "//USER/App/Utils/DataCenter/Account.cpp",
+        "//USER/App/Utils/DataCenter/DataCenter.cpp",
+        "//USER/App/Utils/GPX/GPX.cpp",
+        "//USER/App/Utils/Time/Time.cpp",
+        "//USER/App/Utils/Time/DateStrings.cpp",
+        "//USER/App/Utils/StorageService/StorageService.cpp",
+        "//USER/App/Pages/SystemInfos/SystemInfosView.cpp",
+        "//USER/App/Pages/SystemInfos/SystemInfosModel.cpp",
+        "//USER/App/Pages/SystemInfos/SystemInfos.cpp",
+        "//USER/App/Pages/Startup/StartupView.cpp",
+        "//USER/App/Pages/Startup/Startup.cpp",
+        "//USER/App/Pages/Startup/StartupModel.cpp",
+        "//USER/App/Pages/StatusBar/StatusBar.cpp",
+        "//USER/App/Pages/Dialplate/DialplateModel.cpp",
+        "//USER/App/Pages/Dialplate/Dialplate.cpp",
+        "//USER/App/Pages/Dialplate/DialplateView.cpp",
+        "//USER/App/Pages/_Template/Template.cpp",
+        "//USER/App/Pages/_Template/TemplateModel.cpp",
+        "//USER/App/Pages/_Template/TemplateView.cpp",
+        "//USER/App/Pages/LiveMap/LiveMapView.cpp",
+        "//USER/App/Pages/LiveMap/LiveMapModel.cpp",
+        "//USER/App/Pages/LiveMap/LiveMap.cpp",
+        "//USER/App/Pages/AppFactory.cpp",
+        "//USER/App/App.cpp",
+        "//USER/App/Resource/ResourcePool.cpp",
+        "//USER/App/Utils/MapConv/GPS_Transform/GPS_Transform.c",
+        "//USER/App/Utils/lv_ext/lv_anim_timeline_wrapper.c",
+        "//USER/App/Utils/WString/dtostrf.c",
+        "//USER/App/Utils/DataCenter/PingPongBuffer/PingPongBuffer.c",
+        "//USER/App/Resource/Image/img_src_origin_point.c",
+        "//USER/App/Resource/Image/img_src_bicycle.c",
+        "//USER/App/Resource/Image/img_src_pause.c",
+        "//USER/App/Resource/Image/img_src_start.c",
+        "//USER/App/Resource/Image/img_src_storage.c",
+        "//USER/App/Resource/Image/img_src_gyroscope.c",
+        "//USER/App/Resource/Image/img_src_sd_card.c",
+        "//USER/App/Resource/Image/img_src_locate.c",
+        "//USER/App/Resource/Image/img_src_map_location.c",
+        "//USER/App/Resource/Image/img_src_gps_pin.c",
+        "//USER/App/Resource/Image/img_src_gps_arrow_default.c",
+        "//USER/App/Resource/Image/img_src_gps_arrow_dark.c",
+        "//USER/App/Resource/Image/img_src_gps_arrow_light.c",
+        "//USER/App/Resource/Image/img_src_trip.c",
+        "//USER/App/Resource/Image/img_src_compass.c",
+        "//USER/App/Resource/Image/img_src_system_info.c",
+        "//USER/App/Resource/Image/img_src_time_info.c",
+        "//USER/App/Resource/Image/img_src_battery.c",
+        "//USER/App/Resource/Image/img_src_stop.c",
+        "//USER/App/Resource/Image/img_src_battery_info.c",
+        "//USER/App/Resource/Image/img_src_menu.c",
+        "//USER/App/Resource/Image/img_src_alarm.c",
+        "//USER/App/Resource/Image/img_src_satellite.c",
+        "//USER/App/Resource/Font/font_bahnschrift_65.c",
+        "//USER/App/Resource/Font/font_agencyb_36.c",
+        "//USER/App/Resource/Font/font_bahnschrift_32.c",
+        "//USER/App/Resource/Font/font_bahnschrift_17.c",
+        "//USER/App/Resource/Font/font_bahnschrift_13.c",
+        "//Libraries/ButtonEvent/ButtonEvent.cpp",
+        "//Libraries/TinyGPSPlus/src/TinyGPS++.cpp",
+        "//Libraries/Utils/Utils.cpp",
+        "//Application/X-Track.cpp"
+    ]
+
+    if (chip_type == "hi3559v200") {
+        sources += [
+            "//Vendor/hisilicon/hardware/HAL_Audio.cpp",
+            "//Vendor/hisilicon/hardware/HAL_SD_CARD.cpp",
+            "//Vendor/hisilicon/hardware/HAL_Backlight.cpp",
+            "//Vendor/hisilicon/hardware/HAL_Display.cpp",
+            "//Vendor/hisilicon/hardware/HAL_Encoder.cpp",
+            "//Vendor/hisilicon/hardware/HAL_Power.cpp",
+            "//Vendor/hisilicon/hardware/HAL_MAG.cpp",
+            "//Vendor/hisilicon/hardware/HAL_Clock.cpp",
+            "//Vendor/hisilicon/hardware/HAL_Buzz.cpp",
+            "//Vendor/hisilicon/hardware/HAL_GPS.cpp",
+            "//Vendor/hisilicon/hardware/HAL_IMU.cpp",
+            "//Vendor/hisilicon/hardware/HAL_USB.cpp",
+            "//Vendor/hisilicon/hardware/HAL.cpp"
+        ]
+    }
+
+    include_dirs = [
+        "//Simulator/LVGL.Simulator",
+        "//USER",
+        "//USER/App",
+        "//USER/App/Utils/ArduinoJson/src",
+        "//USER/App/Utils/MapConv",
+        "//Libraries",
+        "//Libraries/ButtonEvent"
+    ]
+
+    deps = [
+        "//Vendor:Vendor",
+        "//Simulator:LVGL.Simulator"
+    ]
+        
+    cflags_c = [
+        "-std=c99",
+        "-O2",
+    ]
+
+    cflags_cc = [
+        "-std=gnu++11",
+        "-O2",
+    ]
+
+    cflags = [
+        "-D_GNU_SOURCE",
+        "-pthread",
+        "-DLINUX",
+        "-DUSE_WIN32DRV=0",
+        "-DUSE_FBDEV=1",
+        "-DDISP_HOR_RES=320",
+        "-DDISP_VER_RES=240",
+        "-DBOARD_BODYCAM_REFB"
+    ]
+
+    if (chip_type == "hi3559v200") {
+        cflags += [
+            "-DHI3559V200"
+        ]
+    }
+    
+    ldflags = [
+        "-llvgl"
+    ]
+
+    if (target_cpu == "arm") {
+        public_configs = [
+            "//Vendor/hisilicon:vendor_lib",
+            "//Vendor/hisilicon:vendor_include"
+        ]
+
+        lib_dirs = [ 
+            "//Out/lib" 
+        ]
+
+        if (chip_vendor == "hisilicon") {
+            if (chip_type == "hi3559v200") {
+                lib_dirs += [ 
+                    "//Vendor/hisilicon/hi3559v200/lib" 
+                ]
+
+                cflags += [
+                    "-DLV_FS_POSIX_PATH=\"/app/sd\"",
+                    "-DLV_HOR_RES=320",
+                    "-DLV_VER_RES=240",
+                    "-DDISP_HOR_RES=320",
+                    "-DDISP_VER_RES=240",
+                ]
+
+                ldflags += [
+                    "-lipcmsg_a7_linux", "-ldatafifo_a7_linux", "-lsecurec",
+                    "-ljpeg", "-lpng", "-lz",
+                    "-lhigv", "-lhigo", "-lhigoadp", "-ltde",
+                    "-lmpi", "-lhi3559v200_mapi_vcap_client", "-lhi3559v200_mapi_vproc_client",
+                    "-lhi3559v200_mapi_venc_client", "-lhi3559v200_mapi_disp_client",
+                    "-lhi3559v200_mapi_acap_client", "-lhi3559v200_mapi_aenc_client",
+                    "-lhi3559v200_mapi_msg_client", "-lhi3559v200_mapi_sys_client",
+                    "-lhi3559v200_mapi_ao_client", "-lhi3559v200_mapi_osd_client",
+                    "-lhi3559v200_mapi_log_client", "-lmwlog", "-lfstool", "-lstorage",
+                    "-leventhub", "-lhfsm", "-lmessagehandler", "-luproc", "-luserproc",
+                    "-lvendor"
+                ]
+            }
+        }
+    }
+
+    if (is_linux) {
+        ldflags += [
+            "-D_GNU_SOURCE",
+            "-pthread",
+            "-lm"
+        ]
+    }
+
+    output_dir = "${root_out_dir}"
+}

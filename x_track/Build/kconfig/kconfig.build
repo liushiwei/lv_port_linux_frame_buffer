@@ -1,0 +1,34 @@
+#
+# For a description of the syntax of this configuration file,
+# see build/scripts/Documentation/kbuild/kconfig-language.txt.
+#
+#comment "Build Configuration"
+
+menu "Build Configure"
+	choice
+		prompt "Build Type"
+		default RELEASE
+		config DEBUG
+			bool "Debug"
+		config RELEASE
+			bool "Release"
+	endchoice
+	choice
+		prompt "Log Level"
+		depends on DEBUG
+		default LOG_LEVEL_DEBUG
+		config LOG_LEVEL_ERR
+			bool "ERROR_LEVEL"
+		config LOG_LEVEL_DEBUG
+			bool "DEBUG_LEVEL"
+	endchoice
+    choice
+		prompt "Log File"
+		default LOG_FILE_OFF
+        config LOG_FILE_ON
+			bool "Enable"
+		config LOG_FILE_OFF
+			bool "Disable"
+	endchoice
+endmenu
+
