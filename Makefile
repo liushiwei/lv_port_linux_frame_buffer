@@ -4,6 +4,7 @@
 CTOOL := riscv64-unknown-linux-gnu-
 CCL := /media/george/android/tina-d1-open/prebuilt/gcc/linux-x86/riscv/toolchain-thead-glibc/riscv64-glibc-gcc-thead_20200702
 CC := ${CCL}/bin/${CTOOL}gcc
+CCP := ${CCL}/bin/${CTOOL}g++
 #CC ?= gcc
 LVGL_DIR_NAME ?= lvgl
 LVGL_DIR ?= ${shell pwd}
@@ -11,6 +12,8 @@ CFLAGS ?= -O3 -g0 -I$(LVGL_DIR)/ -Wall -Wshadow -Wundef -Wmissing-prototypes -Wn
 LDFLAGS ?= -lm
 BIN = demo
 
+X_TRACK_DIR_NAME ?= x_track
+D1S_DIR_NAME ?= d1s
 
 #Collect the files to compile
 MAINSRC = ./main.c
@@ -18,16 +21,18 @@ MAINSRC = ./main.c
 include $(LVGL_DIR)/lvgl/lvgl.mk
 include $(LVGL_DIR)/lv_drivers/lv_drivers.mk
 include $(LVGL_DIR)/lv_demos/lv_demo.mk
-
+include $(LVGL_DIR)/x_track/x_track.mk
+include $(LVGL_DIR)/d1s/d1s.mk
 OBJEXT ?= .o
 
 AOBJS = $(ASRCS:.S=$(OBJEXT))
 COBJS = $(CSRCS:.c=$(OBJEXT))
+CCPOBJS = $(CCPSRCS:.cpp=$(OBJEXT))
 
 MAINOBJ = $(MAINSRC:.c=$(OBJEXT))
 
-SRCS = $(ASRCS) $(CSRCS) $(MAINSRC)
-OBJS = $(AOBJS) $(COBJS)
+SRCS = $(ASRCS) $(CSRCS) $(CCPSRCS) $(MAINSRC)
+OBJS = $(AOBJS) $(COBJS) $(CCPOBJS)
 
 ## MAINOBJ -> OBJFILES
 
@@ -36,10 +41,14 @@ all: default
 %.o: %.c
 	@$(CC)  $(CFLAGS) -c $< -o $@
 	@echo "CC $<"
-    
-default: $(AOBJS) $(COBJS) $(MAINOBJ)
-	$(CC) -o $(BIN) $(MAINOBJ) $(AOBJS) $(COBJS) $(LDFLAGS)
+
+
+%.o : %.cpp
+	$(CCP) $(CCPFLAGS) $< -c -o $@ $(INC_PATH) $(LIB_PATH)
+
+default: $(AOBJS) $(COBJS) $(CCPOBJS) $(MAINOBJ)
+	$(CC) -o $(BIN) $(MAINOBJ) $(AOBJS) $(COBJS)  $(CCPOBJS) $(LDFLAGS)
 
 clean: 
-	rm -f $(BIN) $(AOBJS) $(COBJS) $(MAINOBJ)
+	rm -f $(BIN) $(AOBJS) $(COBJS)  $(CCPOBJS) $(MAINOBJ)
 

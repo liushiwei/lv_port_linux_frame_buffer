@@ -1,0 +1,1 @@
+CCPSRCS += $(shell find -L $(LVGL_DIR)/$(X_TRACK_DIR_NAME)/Application -name \*.cpp)

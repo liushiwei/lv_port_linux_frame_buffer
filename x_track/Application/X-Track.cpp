@@ -24,44 +24,31 @@
 #include "lvgl/examples/lv_examples.h"
 #include "lv_drivers/display/fbdev.h"
 #include "lv_fs_if/lv_fs_if.h"
-
-#include "hi_eventhub.h"
-#include "hi_message.h"
-#include "hi_hfsm.h"
-
-#include "hi_gaugemng.h"
-#include "hi_keymng.h"
-#include "hi_usb.h"
-#include "hi_storagemng.h"
-#include "hi_system.h"
-
-#include "hi_appcomm.h"
-#include "hi_appcomm_util.h"
-#include "hi_appcomm_log.h"
+#include "lv_drivers/display/fbdev.h"
 
 
 static bool g_keyboard_pressed = false;
 static int g_keyboard_value = 0;
 
 
-uint32_t custom_tick_get(void)
-{
-    static uint32_t basic_ms = 0;
-    uint32_t ms = 0;
-    struct timespec monotonic_time;
+// uint32_t custom_tick_get(void)
+// {
+//     static uint32_t basic_ms = 0;
+//     uint32_t ms = 0;
+//     struct timespec monotonic_time;
 
-    memset(&monotonic_time, 0, sizeof(struct timespec));
-    if (basic_ms == 0)
-    {
-        clock_gettime(CLOCK_MONOTONIC, &monotonic_time);
-        basic_ms = monotonic_time.tv_sec * 1000 + monotonic_time.tv_nsec/1000000;
-    }
+//     memset(&monotonic_time, 0, sizeof(struct timespec));
+//     if (basic_ms == 0)
+//     {
+//         clock_gettime(CLOCK_MONOTONIC, &monotonic_time);
+//         basic_ms = monotonic_time.tv_sec * 1000 + monotonic_time.tv_nsec/1000000;
+//     }
 
-    clock_gettime(CLOCK_MONOTONIC, &monotonic_time);
-    ms = monotonic_time.tv_sec * 1000 + monotonic_time.tv_nsec/1000000;
+//     clock_gettime(CLOCK_MONOTONIC, &monotonic_time);
+//     ms = monotonic_time.tv_sec * 1000 + monotonic_time.tv_nsec/1000000;
 
-    return (ms - basic_ms);
-}
+//     return (ms - basic_ms);
+// }
 
 static void lv_keyboard_driver_read_callback(
     lv_indev_drv_t* indev_drv,
@@ -138,28 +125,28 @@ static int lv_usleep(unsigned int usec)
     return ret;
 }
 
-int main()
-{
-    lv_init();
+// int main()
+// {
+//     lv_init();
 
-    lv_fs_if_init();
+//     lv_fs_if_init();
 
-    HAL::HAL_Init();
+//     HAL::HAL_Init();
 
-    /* Display init */
-    lv_display_init();
+//     /* Display init */
+//     lv_display_init();
 
-    App_Init();
+//     App_Init();
 
-    while (1)
-    {
-        lv_task_handler();
-        HAL::HAL_Update();
-        lv_usleep(5 * 1000);
-        lv_tick_inc(5000);
-    }
+//     while (1)
+//     {
+//         lv_task_handler();
+//         HAL::HAL_Update();
+//         lv_usleep(5 * 1000);
+//         lv_tick_inc(5000);
+//     }
 
-    App_Uninit();
+//     App_Uninit();
 
-    return 0;
-}
+//     return 0;
+// }

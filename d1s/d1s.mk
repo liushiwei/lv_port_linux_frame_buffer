@@ -1,0 +1,1 @@
+INC_PATH += -I $(LVGL_DIR)/$(D1S_DIR_NAME)  
