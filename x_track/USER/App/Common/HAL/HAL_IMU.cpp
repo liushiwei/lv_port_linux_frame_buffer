@@ -21,5 +21,5 @@ void HAL::IMU_Update()
     imu.gy = rand() % 1000 - 500;
     imu.gz = rand() % 1000 - 500;
 
-    DataProc::IMU_Commit(&imu);
+    // DataProc::IMU_Commit(&imu);
 }

@@ -36,7 +36,8 @@ CCPFLAGS +=			-std=gnu++11 \
         			-DBOARD_BODYCAM_REFB \
 					-DLV_FS_POSIX_PATH=\"/app/sd\" \
         			-O2
-
+					
+CCPLDFLAGS +=  -lstdc++
 
 # -I $(LVGL_DIR)/$(X_TRACK_DIR_NAME)/Simulator/LVGL.Simulator 
 		# -I $(LVGL_DIR)/$(X_TRACK_DIR_NAME)/Vendor/hisilicon/hi3559v200/prebuilt_libs/middleware/linux/include \

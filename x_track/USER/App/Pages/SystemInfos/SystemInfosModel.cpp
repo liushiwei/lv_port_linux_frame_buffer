@@ -34,7 +34,7 @@ void SystemInfosModel::GetSportInfo(
     HAL::SportStatus_Info_t sport;
     account->Pull("SportStatus", &sport, sizeof(sport));
     *trip = sport.totalDistance / 1000;
-    DataProc::ConvTime(sport.totalTime, time, len);
+    // DataProc::ConvTime(sport.totalTime, time, len);
     *maxSpd = sport.speedMaxKph;
 }
 

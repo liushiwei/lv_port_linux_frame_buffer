@@ -9,5 +9,5 @@ void HAL::MAG_Update()
     mag.y = rand() % 1000 - 500;
     mag.z = rand() % 1000 - 500;
 
-    DataProc::MAG_Commit(&mag);
+    // DataProc::MAG_Commit(&mag);
 }

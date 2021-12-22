@@ -50,7 +50,20 @@ CCPSRCS += /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/GPX_Parser/G
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/HAL/HAL_Buzz.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/HAL/HAL_GPS.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/HAL/HAL_IMU.cpp \
-        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/HAL/HAL.cpp 
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/HAL/HAL.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DataProc.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_Recorder.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_Clock.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_SportStatus.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_Storage.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_MusicPlayer.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_TzConv.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_Power.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_SysConfig.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_TrackFilter.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_MAG.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_GPS.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_IMU.cpp 
 
 CSRCS +=/media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/MapConv/GPS_Transform/GPS_Transform.c \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/lv_ext/lv_anim_timeline_wrapper.c \

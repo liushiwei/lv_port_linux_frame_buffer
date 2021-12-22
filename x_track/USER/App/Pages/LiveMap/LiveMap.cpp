@@ -272,10 +272,10 @@ void LiveMap::SportInfoUpdate()
     );
 
     char buf[16];
-    lv_label_set_text(
-        View.ui.sportInfo.labelTime,
-        DataProc::ConvTime(Model.sportStatusInfo.singleTime, buf, sizeof(buf))
-    );
+    // lv_label_set_text(
+    //     View.ui.sportInfo.labelTime,
+    //     DataProc::ConvTime(Model.sportStatusInfo.singleTime, buf, sizeof(buf))
+    // );
 }
 
 void LiveMap::onEvent(lv_event_t* event)
