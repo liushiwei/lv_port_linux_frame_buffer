@@ -46,6 +46,8 @@ all: default
 	@echo "CCP $<"
 
 default: $(AOBJS) $(COBJS) $(CCPOBJS) $(MAINOBJ)
+	cp lv_drv_conf.h.default lv_drv_conf.h
+	cp lv_conf.h.default lv_conf.h
 	$(CCP) -o $(BIN) $(MAINOBJ) $(AOBJS) $(COBJS)  $(CCPOBJS) $(LDFLAGS)
 
 clean: 
