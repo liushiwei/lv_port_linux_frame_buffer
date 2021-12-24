@@ -18,6 +18,8 @@
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/keyboard.h"
 #include "lv_drivers/indev/mousewheel.h"
+#include "App.h"
+#include "lv_fs_if/lv_fs_if.h"
 
 /*********************
  *      DEFINES
@@ -99,7 +101,10 @@ int main(int argc, char **argv)
 //  lv_demo_benchmark();
 //  lv_demo_stress();
 //  lv_demo_music();
-
+    lv_fs_if_init();
+    // lv_display_init();
+    // DataProc_Init();
+    App_Init();
   while(1) {
     /* Periodically call the lv_task handler.
      * It could be done in a timer interrupt or an OS task too.*/
@@ -127,20 +132,21 @@ static void hal_init(void)
    * how much time were elapsed Create an SDL thread to do this*/
   SDL_CreateThread(tick_thread, "tick", NULL);
 
-  /*Create a display buffer*/
-  static lv_disp_draw_buf_t disp_buf1;
-  static lv_color_t buf1_1[MONITOR_HOR_RES * 100];
-  static lv_color_t buf1_2[MONITOR_HOR_RES * 100];
-  lv_disp_draw_buf_init(&disp_buf1, buf1_1, buf1_2, MONITOR_HOR_RES * 100);
+   /*Initialize a descriptor for the buffer*/
+    static lv_disp_draw_buf_t draw_buf;
+    lv_disp_draw_buf_init(&draw_buf, 
+        (lv_color_t*)malloc(DISP_HOR_RES * DISP_VER_RES * sizeof(lv_color_t)),
+        (lv_color_t*)malloc(DISP_HOR_RES * DISP_VER_RES * sizeof(lv_color_t)),
+        DISP_HOR_RES * DISP_VER_RES * sizeof(lv_color_t));
 
-  /*Create a display*/
-  static lv_disp_drv_t disp_drv;
-  lv_disp_drv_init(&disp_drv); /*Basic initialization*/
-  disp_drv.draw_buf = &disp_buf1;
-  disp_drv.flush_cb = monitor_flush;
-  disp_drv.hor_res = MONITOR_HOR_RES;
-  disp_drv.ver_res = MONITOR_VER_RES;
-  disp_drv.antialiasing = 1;
+    /*Initialize and register a display driver*/
+    static lv_disp_drv_t disp_drv;
+    lv_disp_drv_init(&disp_drv);
+    disp_drv.hor_res = DISP_HOR_RES;
+    disp_drv.ver_res = DISP_VER_RES;
+    disp_drv.flush_cb = monitor_flush;
+    disp_drv.draw_buf = &draw_buf;
+    lv_disp_drv_register(&disp_drv);
 
   lv_disp_t * disp = lv_disp_drv_register(&disp_drv);
 
