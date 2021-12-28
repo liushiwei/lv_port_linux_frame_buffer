@@ -1,0 +1,253 @@
+diff --git a/src/core/lv_core.mk b/src/core/lv_core.mk
+index 677a9f6b..cb6e0d5c 100644
+--- a/src/core/lv_core.mk
++++ b/src/core/lv_core.mk
+@@ -1,18 +1,18 @@
+-CSRCS += lv_disp.c
+-CSRCS += lv_group.c
+-CSRCS += lv_indev.c
+-CSRCS += lv_indev_scroll.c
+-CSRCS += lv_obj.c
+-CSRCS += lv_obj_class.c
+-CSRCS += lv_obj_draw.c
+-CSRCS += lv_obj_pos.c
+-CSRCS += lv_obj_scroll.c
+-CSRCS += lv_obj_style.c
+-CSRCS += lv_obj_style_gen.c
+-CSRCS += lv_obj_tree.c
+-CSRCS += lv_event.c
+-CSRCS += lv_refr.c
+-CSRCS += lv_theme.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_disp.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_group.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_indev.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_indev_scroll.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_class.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_draw.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_pos.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_scroll.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_style.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_style_gen.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_obj_tree.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_event.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_refr.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core/lv_theme.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/core
+diff --git a/src/draw/lv_draw.mk b/src/draw/lv_draw.mk
+index a31fedf4..f34617e5 100644
+--- a/src/draw/lv_draw.mk
++++ b/src/draw/lv_draw.mk
+@@ -1,14 +1,14 @@
+-CSRCS += lv_draw_arc.c
+-CSRCS += lv_draw_blend.c
+-CSRCS += lv_draw_img.c
+-CSRCS += lv_draw_label.c
+-CSRCS += lv_draw_line.c
+-CSRCS += lv_draw_mask.c
+-CSRCS += lv_draw_rect.c
+-CSRCS += lv_draw_triangle.c
+-CSRCS += lv_img_buf.c
+-CSRCS += lv_img_cache.c
+-CSRCS += lv_img_decoder.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_arc.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_blend.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_img.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_label.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_line.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_mask.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_rect.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_draw_triangle.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_img_buf.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_img_cache.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw/lv_img_decoder.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/draw
+diff --git a/src/font/lv_font.mk b/src/font/lv_font.mk
+index 2201b73f..4b4c50c5 100644
+--- a/src/font/lv_font.mk
++++ b/src/font/lv_font.mk
+@@ -1,34 +1,34 @@
+-CSRCS += lv_font.c
+-CSRCS += lv_font_fmt_txt.c
+-CSRCS += lv_font_loader.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_fmt_txt.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_loader.c
+ 
+-CSRCS += lv_font_dejavu_16_persian_hebrew.c
+-CSRCS += lv_font_montserrat_8.c
+-CSRCS += lv_font_montserrat_10.c
+-CSRCS += lv_font_montserrat_12.c
+-CSRCS += lv_font_montserrat_12_subpx.c
+-CSRCS += lv_font_montserrat_14.c
+-CSRCS += lv_font_montserrat_16.c
+-CSRCS += lv_font_montserrat_18.c
+-CSRCS += lv_font_montserrat_20.c
+-CSRCS += lv_font_montserrat_22.c
+-CSRCS += lv_font_montserrat_24.c
+-CSRCS += lv_font_montserrat_26.c
+-CSRCS += lv_font_montserrat_28.c
+-CSRCS += lv_font_montserrat_28_compressed.c
+-CSRCS += lv_font_montserrat_30.c
+-CSRCS += lv_font_montserrat_32.c
+-CSRCS += lv_font_montserrat_34.c
+-CSRCS += lv_font_montserrat_36.c
+-CSRCS += lv_font_montserrat_38.c
+-CSRCS += lv_font_montserrat_40.c
+-CSRCS += lv_font_montserrat_42.c
+-CSRCS += lv_font_montserrat_44.c
+-CSRCS += lv_font_montserrat_46.c
+-CSRCS += lv_font_montserrat_48.c
+-CSRCS += lv_font_simsun_16_cjk.c
+-CSRCS += lv_font_unscii_8.c
+-CSRCS += lv_font_unscii_16.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_dejavu_16_persian_hebrew.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_8.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_10.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_12.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_12_subpx.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_14.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_16.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_18.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_20.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_22.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_24.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_26.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_28.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_28_compressed.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_30.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_32.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_34.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_36.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_38.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_40.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_42.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_44.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_46.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_montserrat_48.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_simsun_16_cjk.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_unscii_8.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font/lv_font_unscii_16.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/font
+diff --git a/src/gpu/lv_gpu.mk b/src/gpu/lv_gpu.mk
+index d909b033..260294ab 100644
+--- a/src/gpu/lv_gpu.mk
++++ b/src/gpu/lv_gpu.mk
+@@ -1,7 +1,7 @@
+-CSRCS += lv_gpu_nxp_pxp.c
+-CSRCS += lv_gpu_nxp_pxp_osa.c
+-CSRCS += lv_gpu_nxp_vglite.c
+-CSRCS += lv_gpu_stm32_dma2d.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/gpu/lv_gpu_nxp_pxp.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/gpu/lv_gpu_nxp_pxp_osa.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/gpu/lv_gpu_nxp_vglite.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/gpu/lv_gpu_stm32_dma2d.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/gpu
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/gpu
+diff --git a/src/hal/lv_hal.mk b/src/hal/lv_hal.mk
+index c35ec2d7..8b033f0e 100644
+--- a/src/hal/lv_hal.mk
++++ b/src/hal/lv_hal.mk
+@@ -1,6 +1,6 @@
+-CSRCS += lv_hal_disp.c
+-CSRCS += lv_hal_indev.c
+-CSRCS += lv_hal_tick.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/hal/lv_hal_disp.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/hal/lv_hal_indev.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/hal/lv_hal_tick.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/hal
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/hal
+diff --git a/src/misc/lv_misc.mk b/src/misc/lv_misc.mk
+index 5e053f87..1edb6b62 100644
+--- a/src/misc/lv_misc.mk
++++ b/src/misc/lv_misc.mk
+@@ -1,23 +1,23 @@
+-CSRCS += lv_anim.c
+-CSRCS += lv_anim_timeline.c
+-CSRCS += lv_area.c
+-CSRCS += lv_async.c
+-CSRCS += lv_bidi.c
+-CSRCS += lv_color.c
+-CSRCS += lv_fs.c
+-CSRCS += lv_gc.c
+-CSRCS += lv_ll.c
+-CSRCS += lv_log.c
+-CSRCS += lv_math.c
+-CSRCS += lv_mem.c
+-CSRCS += lv_printf.c
+-CSRCS += lv_style.c
+-CSRCS += lv_style_gen.c
+-CSRCS += lv_timer.c
+-CSRCS += lv_tlsf.c
+-CSRCS += lv_txt.c
+-CSRCS += lv_txt_ap.c
+-CSRCS += lv_utils.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_anim.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_anim_timeline.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_area.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_async.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_bidi.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_color.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_fs.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_gc.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_ll.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_log.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_math.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_mem.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_printf.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_style.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_style_gen.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_timer.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_tlsf.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_txt.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_txt_ap.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc/lv_utils.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/misc
+diff --git a/src/widgets/lv_widgets.mk b/src/widgets/lv_widgets.mk
+index 4e62dc58..1895f1ac 100644
+--- a/src/widgets/lv_widgets.mk
++++ b/src/widgets/lv_widgets.mk
+@@ -1,18 +1,18 @@
+-CSRCS += lv_arc.c
+-CSRCS += lv_bar.c
+-CSRCS += lv_btn.c
+-CSRCS += lv_btnmatrix.c
+-CSRCS += lv_canvas.c
+-CSRCS += lv_checkbox.c
+-CSRCS += lv_dropdown.c
+-CSRCS += lv_img.c
+-CSRCS += lv_label.c
+-CSRCS += lv_line.c
+-CSRCS += lv_roller.c
+-CSRCS += lv_slider.c
+-CSRCS += lv_switch.c
+-CSRCS += lv_table.c
+-CSRCS += lv_textarea.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_arc.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_bar.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_btn.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_btnmatrix.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_canvas.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_checkbox.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_dropdown.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_img.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_label.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_line.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_roller.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_slider.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_switch.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_table.c
++CSRCS += $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets/lv_textarea.c
+ 
+ DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets
+ VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets
