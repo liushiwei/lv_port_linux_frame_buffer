@@ -293,11 +293,11 @@ void SystemInfosView::SetSport(
 {
     lv_label_set_text_fmt(
         ui.sport.labelData,
-        "%0.2fkm\n"
         "%s\n"
+        "%0.2fkm\n"
         "%0.1fkm/h",
-        trip,
         time,
+        trip,
         maxSpd
     );
 }
@@ -313,16 +313,16 @@ void SystemInfosView::SetGPS(
 {
     lv_label_set_text_fmt(
         ui.gps.labelData,
+        "%s\n"
         "%0.6f\n"
         "%0.6f\n"
         "%0.2fm\n"
-        "%s\n"
         "%0.1f deg\n"
         "%0.1fkm/h",
+        utc,
         lat,
         lng,
         alt,
-        utc,
         course,
         speed
     );
@@ -355,10 +355,10 @@ void SystemInfosView::SetIMU(
 {
     lv_label_set_text_fmt(
         ui.imu.labelData,
-        "%d\n"
         "%s",
-        step,
-        info
+        "%d\n",
+        info,
+        step
     );
 }
 
@@ -380,12 +380,12 @@ void SystemInfosView::SetBattery(
 {
     lv_label_set_text_fmt(
         ui.battery.labelData,
+        "%s"
         "%d%%\n"
-        "%0.2fV\n"
-        "%s",
+        "%0.2fV\n",
+        state,
         usage,
-        voltage,
-        state
+        voltage
     );
 }
 

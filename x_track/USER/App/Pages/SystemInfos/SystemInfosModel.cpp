@@ -31,11 +31,15 @@ void SystemInfosModel::GetSportInfo(
     float* maxSpd
 )
 {
+    LV_LOG_USER("SportStatus");
     HAL::SportStatus_Info_t sport;
+    LV_LOG_USER("SportStatus0");
     account->Pull("SportStatus", &sport, sizeof(sport));
+    LV_LOG_USER("SportStatus1");
     *trip = sport.totalDistance / 1000;
-    // DataProc::ConvTime(sport.totalTime, time, len);
+    DataProc::ConvTime(sport.totalTime, time, len);
     *maxSpd = sport.speedMaxKph;
+    LV_LOG_USER("SportStatus2 %s",time);
 }
 
 void SystemInfosModel::GetGPSInfo(

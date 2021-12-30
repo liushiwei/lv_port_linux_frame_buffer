@@ -128,7 +128,7 @@ void SystemInfos::Update()
     );
 
     /* System */
-    // DataProc::ConvTime(lv_tick_get(), buf, sizeof(buf));
+    DataProc::ConvTime(lv_tick_get(), buf, sizeof(buf));
     View.SetSystem(
         VERSION_FIRMWARE_NAME " " VERSION_SOFTWARE,
         VERSION_AUTHOR_NAME,
