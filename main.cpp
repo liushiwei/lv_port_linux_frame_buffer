@@ -63,6 +63,17 @@ static void lv_display_init(void)
     disp_drv.draw_buf = &draw_buf;
     lv_disp_drv_register(&disp_drv);
 
+    // /* Add the mouse (or touchpad) as input device
+    // * Use the 'mouse' driver which reads the PC's mouse*/
+    evdev_init();
+    evdev_set_file("/dev/input/event2");
+    /* Set up touchpad input device interface */
+    lv_indev_drv_t indev_drv;
+    lv_indev_drv_init(&indev_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
+    indev_drv.read_cb = evdev_read;
+    lv_indev_t *indev = lv_indev_drv_register(&indev_drv);
+
     static lv_indev_drv_t kb_drv;
     lv_indev_drv_init(&kb_drv);
     kb_drv.type = LV_INDEV_TYPE_KEYPAD;
