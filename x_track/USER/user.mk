@@ -14,6 +14,8 @@ CCPSRCS += /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/GPX_Parser/G
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/TileConv/TileConv.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/TrackFilter/TrackPointFilter.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/TrackFilter/TrackLineFilter.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/PointContainer/PointContainer.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/lv_poly_line/lv_poly_line.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/TonePlayer/TonePlayer.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/WString/WString.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/DataCenter/Account.cpp \
@@ -25,9 +27,9 @@ CCPSRCS += /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/GPX_Parser/G
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/SystemInfos/SystemInfosView.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/SystemInfos/SystemInfosModel.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/SystemInfos/SystemInfos.cpp \
-        /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/Startup/StartupView.cpp \
-        /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/Startup/Startup.cpp \
-        /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/Startup/StartupModel.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/StartUp/StartUpView.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/StartUp/StartUp.cpp \
+        /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/StartUp/StartUpModel.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/StatusBar/StatusBar.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/Dialplate/DialplateModel.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Pages/Dialplate/Dialplate.cpp \
@@ -64,6 +66,10 @@ CCPSRCS += /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/GPX_Parser/G
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_MAG.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_GPS.cpp \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Common/DataProc/DP_IMU.cpp 
+        # /media/george/android/X-TRACK_D1s/x_track/USER/lv_port/lv_port.cpp \
+        # /media/george/android/X-TRACK_D1s/x_track/USER/lv_port/lv_port_disp.cpp \
+        # /media/george/android/X-TRACK_D1s/x_track/USER/lv_port/lv_port_fs_sdfat.cpp \
+        # /media/george/android/X-TRACK_D1s/x_track/USER/lv_port/lv_port_indev.cpp 
 
 CSRCS +=/media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/MapConv/GPS_Transform/GPS_Transform.c \
         /media/george/android/X-TRACK_D1s/x_track/USER/App/Utils/lv_ext/lv_anim_timeline_wrapper.c \

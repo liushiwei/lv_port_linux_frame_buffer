@@ -20,14 +20,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include "Utils/PageManager/PageManager.h"
+#include "Config/Config.h"
 #include "Common/DataProc/DataProc.h"
 #include "Resource/ResourcePool.h"
 #include "Pages/AppFactory.h"
 #include "Pages/StatusBar/StatusBar.h"
-
-static AppFactory factory;
-static PageManager manager(&factory);
+#include "Utils/PageManager/PageManager.h"
 
 #define ACCOUNT_SEND_CMD(ACT, CMD)\
 do{\
@@ -39,12 +37,39 @@ do{\
 
 void App_Init()
 {
+    static AppFactory factory;
+    static PageManager manager(&factory);
+
+#if CONFIG_MONKEY_TEST_ENABLE
+    lv_monkey_config_t config;
+    lv_monkey_config_init(&config);
+    config.type = CONFIG_MONKEY_INDEV_TYPE;
+    config.period_range.min = CONFIG_MONKEY_PERIOD_MIN;
+    config.period_range.max = CONFIG_MONKEY_PERIOD_MAX;
+    config.input_range.min = CONFIG_MONKEY_INPUT_RANGE_MIN;
+    config.input_range.max = CONFIG_MONKEY_INPUT_RANGE_MAX;
+    lv_monkey_t* monkey = lv_monkey_create(&config);
+    lv_monkey_set_enable(monkey, true);
+
+    lv_group_t* group = lv_group_create();
+    lv_indev_set_group(lv_monkey_get_indev(monkey), group);
+    lv_group_set_default(group);
+
+    LV_LOG_USER("lv_monkey test started!");
+#endif
+    lv_group_t* group = lv_group_create();
+    lv_group_set_default(group);
     DataProc_Init();
 
-    lv_obj_remove_style_all(lv_scr_act());
+    ACCOUNT_SEND_CMD(Storage, STORAGE_CMD_LOAD);
+    ACCOUNT_SEND_CMD(SysConfig, SYSCONFIG_CMD_LOAD);
+
+    lv_obj_t* scr = lv_scr_act();
+    lv_obj_remove_style_all(scr);
+    lv_obj_clear_flag(scr, LV_OBJ_FLAG_SCROLLABLE);
     lv_disp_set_bg_color(lv_disp_get_default(), lv_color_black());
 
-    Resource.Init();
+    ResourcePool::Init();
 
     StatusBar::Init(lv_layer_top());
 
@@ -57,9 +82,6 @@ void App_Init()
     manager.SetGlobalLoadAnimType(PageManager::LOAD_ANIM_OVER_TOP, 500);
 
     manager.Push("Pages/Startup");
-
-    ACCOUNT_SEND_CMD(Storage, STORAGE_CMD_LOAD);
-    ACCOUNT_SEND_CMD(SysConfig, SYSCONFIG_CMD_LOAD);
 }
 
 void App_Uninit()

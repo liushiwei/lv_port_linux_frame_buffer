@@ -64,6 +64,7 @@ typedef struct
     bool isDetect;
     float totalSizeMB;
     float freeSizeMB;
+    const char* type;
 } Storage_Basic_Info_t;
 
 /* StatusBar */
@@ -89,13 +90,15 @@ typedef enum
 typedef struct
 {
     SysConfig_Cmd_t cmd;
+    float longitude;
+    float latitude;
+    int16_t timeZone;
     bool soundEnable;
-    double longitudeDefault;
-    double latitudeDefault;
     char language[8];
-    char mapDirPath[32];
-    bool WGS84;
-    char arrowTheme[8];
+    char arrowTheme[16];
+    char mapDirPath[16];
+    char mapExtName[8];
+    bool mapWGS84;
 } SysConfig_Info_t;
 
 /* TrackFilter */
@@ -109,15 +112,9 @@ typedef enum
 
 typedef struct
 {
-    float longitude;
-    float latitude;
-} TrackFilter_Point_t;
-
-typedef struct
-{
     TrackFilter_Cmd_t cmd;
-    TrackFilter_Point_t* points;
-    uint32_t size;
+    void* pointCont;
+    uint8_t level;
     bool isActive;
 } TrackFilter_Info_t;
 

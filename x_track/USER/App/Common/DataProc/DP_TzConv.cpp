@@ -5,23 +5,29 @@
 
 using namespace DataProc;
 
-// Offset hours from gps time (UTC)
-static int GMT_OffsetHours = CONFIG_SYSTEM_GMT_OFFSET_DEFAULT;
-
 static int onEvent(Account* account, Account::EventParam_t* param)
 {
     if (param->event != Account::EVENT_SUB_PULL)
     {
-        return Account::ERROR_UNSUPPORTED_REQUEST;
+        return Account::RES_UNSUPPORTED_REQUEST;
     }
 
     if (param->size != sizeof(HAL::Clock_Info_t))
     {
-        return Account::ERROR_SIZE_MISMATCH;
+        return Account::RES_SIZE_MISMATCH;
     }
 
     HAL::GPS_Info_t gps;
-    account->Pull("GPS", &gps, sizeof(gps));
+    if (account->Pull("GPS", &gps, sizeof(gps)) != Account::RES_OK)
+    {
+        return Account::RES_UNKNOW;
+    }
+
+    DataProc::SysConfig_Info_t sysCfg;
+    if (account->Pull("SysConfig", &sysCfg, sizeof(sysCfg)) != Account::RES_OK)
+    {
+        return Account::RES_UNKNOW;
+    }
 
     setTime(
         gps.clock.hour,
@@ -31,7 +37,7 @@ static int onEvent(Account* account, Account::EventParam_t* param)
         gps.clock.month,
         gps.clock.year
     );
-    adjustTime(GMT_OffsetHours * SECS_PER_HOUR);
+    adjustTime(sysCfg.timeZone * SECS_PER_HOUR);
 
     HAL::Clock_Info_t* info = (HAL::Clock_Info_t*)param->data_p;
     info->year = year();
@@ -47,8 +53,6 @@ static int onEvent(Account* account, Account::EventParam_t* param)
 DATA_PROC_INIT_DEF(TzConv)
 {
     account->Subscribe("GPS");
-    account->Subscribe("Storage");
+    account->Subscribe("SysConfig");
     account->SetEventCallback(onEvent);
-
-    STORAGE_VALUE_REG(account, GMT_OffsetHours, STORAGE_TYPE_INT);
 }

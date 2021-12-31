@@ -1,6 +1,8 @@
 #include "HAL.h"
 #include <stdlib.h>
 #include "Common/DataProc/DataProc.h"
+static HAL::CommitFunc_t CommitFunc = nullptr;
+static void* UserData = nullptr;
 
 void HAL::IMU_Update()
 {
@@ -22,4 +24,15 @@ void HAL::IMU_Update()
     imu.gz = rand() % 1000 - 500;
 
     // DataProc::IMU_Commit(&imu);
+}
+void HAL::IMU_Init()
+{
+    //Serial.print("IMU: init...");
+    //Serial.println(imu.Init() ? "success" : "failed");
+}
+
+void HAL::IMU_SetCommitCallback(CommitFunc_t func, void* userData)
+{
+    CommitFunc = func;
+    UserData = userData;
 }

@@ -39,19 +39,19 @@ void SystemInfos::onViewDidLoad()
 
 void SystemInfos::onViewWillAppear()
 {
-    lv_indev_set_group(lv_get_indev(LV_INDEV_TYPE_ENCODER), View.ui.group);
     StatusBar::SetStyle(StatusBar::STYLE_BLACK);
 
     timer = lv_timer_create(onTimerUpdate, 1000, this);
     lv_timer_ready(timer);
 
     View.SetScrollToY(root, -LV_VER_RES, LV_ANIM_OFF);
+    lv_obj_set_style_opa(root, LV_OPA_TRANSP, 0);
     lv_obj_fade_in(root, 300, 0);
 }
 
 void SystemInfos::onViewDidAppear()
 {
-    View.onFocus(View.ui.group);
+    View.onFocus(lv_group_get_default());
 }
 
 void SystemInfos::onViewWillDisappear()
@@ -72,7 +72,6 @@ void SystemInfos::onViewDidUnload()
 
 void SystemInfos::AttachEvent(lv_obj_t* obj)
 {
-    lv_obj_set_user_data(obj, this);
     lv_obj_add_event_cb(obj, onEvent, LV_EVENT_ALL, this);
 }
 
@@ -120,15 +119,17 @@ void SystemInfos::Update()
 
     /* Storage */
     bool detect;
-    Model.GetStorageInfo(&detect, buf, sizeof(buf));
+    const char* type = "-";
+    Model.GetStorageInfo(&detect, &type, buf, sizeof(buf));
     View.SetStorage(
-        detect ? "YES" : "NO",
+        detect ? "OK" : "ERROR",
         buf,
+        type,
         VERSION_FILESYSTEM
     );
 
     /* System */
-    DataProc::ConvTime(lv_tick_get(), buf, sizeof(buf));
+    DataProc::MakeTimeString(lv_tick_get(), buf, sizeof(buf));
     View.SetSystem(
         VERSION_FIRMWARE_NAME " " VERSION_SOFTWARE,
         VERSION_AUTHOR_NAME,
@@ -148,9 +149,11 @@ void SystemInfos::onTimerUpdate(lv_timer_t* timer)
 
 void SystemInfos::onEvent(lv_event_t* event)
 {
+    SystemInfos* instance = (SystemInfos*)lv_event_get_user_data(event);
+    LV_ASSERT_NULL(instance);
+
     lv_obj_t* obj = lv_event_get_target(event);
     lv_event_code_t code = lv_event_get_code(event);
-    SystemInfos* instance = (SystemInfos*)lv_obj_get_user_data(obj);
 
     if (code == LV_EVENT_PRESSED)
     {

@@ -29,3 +29,9 @@ void HAL::SD_Update()
 {
     
 }
+const char* HAL::SD_GetTypeName()
+{
+    const char* type = "Unknown";
+failed:
+    return type;
+}

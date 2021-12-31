@@ -1,4 +1,4 @@
-#include "StartupView.h"
+#include "StartUpView.h"
 
 using namespace Page;
 
@@ -11,6 +11,7 @@ void StartupView::Create(lv_obj_t* root)
 
     lv_obj_t* cont = lv_obj_create(root);
     lv_obj_remove_style_all(cont);
+    lv_obj_clear_flag(cont, LV_OBJ_FLAG_SCROLLABLE);
     lv_obj_set_size(cont, 110, 50);
     lv_obj_set_style_border_color(cont, COLOR_ORANGE, 0);
     lv_obj_set_style_border_side(cont, LV_BORDER_SIDE_BOTTOM, 0);
@@ -20,7 +21,7 @@ void StartupView::Create(lv_obj_t* root)
     ui.cont = cont;
 
     lv_obj_t* label = lv_label_create(cont);
-    lv_obj_set_style_text_font(label, Resource.GetFont("agencyb_36"), 0);
+    lv_obj_set_style_text_font(label, ResourcePool::GetFont("agencyb_36"), 0);
     lv_obj_set_style_text_color(label, lv_color_white(), 0);
     lv_label_set_text(label, "X-TRACK");
     lv_obj_center(label);

@@ -31,7 +31,6 @@ public:
         item_t battery;
         item_t storage;
         item_t system;
-        lv_group_t* group;
     } ui;
 
 public:
@@ -69,6 +68,7 @@ public:
     void SetStorage(
         const char* detect,
         const char* size,
+        const char* type,
         const char* version
     );
     void SetSystem(

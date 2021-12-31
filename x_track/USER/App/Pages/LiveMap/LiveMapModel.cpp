@@ -1,5 +1,6 @@
 #include "LiveMapModel.h"
 #include "Config/Config.h"
+#include "Utils/PointContainer/PointContainer.h"
 
 using namespace Page;
 
@@ -25,9 +26,6 @@ void LiveMapModel::Deinit()
         delete account;
         account = nullptr;
     }
-
-    std::vector<TileConv::Point_t, lv_allocator<TileConv::Point_t>> vec;
-    trackPoints.swap(vec);
 }
 
 void LiveMapModel::GetGPS_Info(HAL::GPS_Info_t* info)
@@ -39,8 +37,8 @@ void LiveMapModel::GetGPS_Info(HAL::GPS_Info_t* info)
     {
         DataProc::SysConfig_Info_t sysConfig;
         account->Pull("SysConfig", &sysConfig, sizeof(sysConfig));
-        info->longitude = sysConfig.longitudeDefault;
-        info->latitude = sysConfig.latitudeDefault;
+        info->longitude = sysConfig.longitude;
+        info->latitude = sysConfig.latitude;
     }
 }
 
@@ -55,7 +53,7 @@ int LiveMapModel::onEvent(Account* account, Account::EventParam_t* param)
 {
     if (param->event != Account::EVENT_PUB_PUBLISH)
     {
-        return Account::ERROR_UNSUPPORTED_REQUEST;
+        return Account::RES_UNSUPPORTED_REQUEST;
     }
 
     if (strcmp(param->tran->ID, "SportStatus") != 0
@@ -70,49 +68,39 @@ int LiveMapModel::onEvent(Account* account, Account::EventParam_t* param)
     return 0;
 }
 
-void LiveMapModel::TrackAddPoint(int32_t x, int32_t y)
-{
-    TileConv::Point_t point = { x, y };
-    trackPoints.push_back(point);
-}
-
-void LiveMapModel::TrackReload()
+void LiveMapModel::TrackReload(TrackPointFilter::Callback_t callback, void* userData)
 {
     DataProc::TrackFilter_Info_t info;
     account->Pull("TrackFilter", &info, sizeof(info));
 
-    if (!info.isActive)
+    if (!info.isActive || info.pointCont == nullptr)
     {
         return;
     }
 
-    TrackReset();
+    PointContainer* pointContainer = (PointContainer*)info.pointCont;
+
+    pointContainer->PopStart();
+    pointFilter.Reset();
 
     TrackPointFilter ptFilter;
 
     ptFilter.SetOffsetThreshold(CONFIG_TRACK_FILTER_OFFSET_THRESHOLD);
+    ptFilter.SetOutputPointCallback(callback);
+    ptFilter.SetSecondFilterModeEnable(true);
+    ptFilter.userData = userData;
 
-    uint32_t size = info.size;
-    DataProc::TrackFilter_Point_t* points = info.points;
-
-    for (uint32_t i = 0; i < size; i++)
-    {
+    int32_t pointX, pointY;
+    while (pointContainer->PopPoint(&pointX, &pointY))
+    { 
         int32_t mapX, mapY;
-        mapConv.ConvertMapCoordinate(
-            points[i].longitude, points[i].latitude,
-            &mapX, &mapY
+        mapConv.ConvertMapLevelPos(
+            &mapX, &mapY,
+            pointX, pointY,
+            info.level
         );
 
-        if (ptFilter.PushPoint(mapX, mapY))
-        {
-            TrackAddPoint(mapX, mapY);
-        }
+        ptFilter.PushPoint(mapX, mapY);
     }
+    ptFilter.PushEnd();
 }
-
-void LiveMapModel::TrackReset()
-{
-    trackPoints.clear();
-    pointFilter.Reset();
-}
-

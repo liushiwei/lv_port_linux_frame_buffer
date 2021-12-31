@@ -11,7 +11,7 @@ INC_PATH += -I $(LVGL_DIR)/$(X_TRACK_DIR_NAME)/USER \
 		-I $(LVGL_DIR)/$(X_TRACK_DIR_NAME)/Libraries/ButtonEvent \
 		-I $(LVGL_DIR) 
 		
-CFLAGS +=			-DLV_FS_POSIX_PATH=\"/app/sd\" \
+CFLAGS +=			-DLV_FS_POSIX_PATH=\"/mnt/SDCARD\" \
                     -DLV_HOR_RES=320 \
                     -DLV_VER_RES=240 \
                     -DDISP_HOR_RES=320 \
@@ -34,7 +34,7 @@ CCPFLAGS +=			-std=gnu++11 \
         			-DUSE_WIN32DRV=0 \
         			-DUSE_FBDEV=1 \
         			-DBOARD_BODYCAM_REFB \
-					-DLV_FS_POSIX_PATH=\"/app/sd\" \
+					-DLV_FS_POSIX_PATH=\"/mnt/SDCARD\" \
         			-O2
 					
 CCPLDFLAGS +=  -lstdc++

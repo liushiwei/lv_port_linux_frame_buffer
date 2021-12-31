@@ -109,8 +109,9 @@ void SystemInfosView::Create(lv_obj_t* root)
         "Storage",
         "storage",
 
-        "Detect\n"
+        "Status\n"
         "Size\n"
+        "Type\n"
         "Version"
     );
 
@@ -134,25 +135,25 @@ void SystemInfosView::Create(lv_obj_t* root)
 
 void SystemInfosView::Group_Init()
 {
-    ui.group = lv_group_create();
-    lv_group_set_focus_cb(ui.group, onFocus);
-    lv_indev_set_group(lv_get_indev(LV_INDEV_TYPE_ENCODER), ui.group);
+    lv_group_t* group = lv_group_get_default();
+    lv_group_set_wrap(group, true);
+    lv_group_set_focus_cb(group, onFocus);
 
-    lv_group_add_obj(ui.group, ui.system.icon);
-    lv_group_add_obj(ui.group, ui.storage.icon);
-    lv_group_add_obj(ui.group, ui.battery.icon);
-    lv_group_add_obj(ui.group, ui.rtc.icon);
-    lv_group_add_obj(ui.group, ui.imu.icon);
-    lv_group_add_obj(ui.group, ui.mag.icon);
-    lv_group_add_obj(ui.group, ui.gps.icon);
-    lv_group_add_obj(ui.group, ui.sport.icon);
+    lv_group_add_obj(group, ui.system.icon);
+    lv_group_add_obj(group, ui.storage.icon);
+    lv_group_add_obj(group, ui.battery.icon);
+    lv_group_add_obj(group, ui.rtc.icon);
+    lv_group_add_obj(group, ui.imu.icon);
+    lv_group_add_obj(group, ui.mag.icon);
+    lv_group_add_obj(group, ui.gps.icon);
+    lv_group_add_obj(group, ui.sport.icon);
 
     lv_group_focus_obj(ui.sport.icon);
 }
 
 void SystemInfosView::Delete()
 {
-    lv_group_del(ui.group);
+    lv_group_set_focus_cb(lv_group_get_default(), nullptr);
     Style_Reset();
 }
 
@@ -178,7 +179,7 @@ void SystemInfosView::Style_Init()
     lv_style_set_width(&style.icon, 220);
     lv_style_set_bg_color(&style.icon, lv_color_black());
     lv_style_set_bg_opa(&style.icon, LV_OPA_COVER);
-    lv_style_set_text_font(&style.icon, Resource.GetFont("bahnschrift_17"));
+    lv_style_set_text_font(&style.icon, ResourcePool::GetFont("bahnschrift_17"));
     lv_style_set_text_color(&style.icon, lv_color_white());
 
     lv_style_init(&style.focus);
@@ -206,11 +207,11 @@ void SystemInfosView::Style_Init()
     lv_style_set_transition(&style.icon, &trans);
 
     lv_style_init(&style.info);
-    lv_style_set_text_font(&style.info, Resource.GetFont("bahnschrift_13"));
+    lv_style_set_text_font(&style.info, ResourcePool::GetFont("bahnschrift_13"));
     lv_style_set_text_color(&style.info, lv_color_hex(0x999999));
 
     lv_style_init(&style.data);
-    lv_style_set_text_font(&style.data, Resource.GetFont("bahnschrift_13"));
+    lv_style_set_text_font(&style.data, ResourcePool::GetFont("bahnschrift_13"));
     lv_style_set_text_color(&style.data, lv_color_white());
 }
 
@@ -255,7 +256,7 @@ void SystemInfosView::Item_Create(
     );
 
     lv_obj_t* img = lv_img_create(icon);
-    lv_img_set_src(img, Resource.GetImage(img_src));
+    lv_img_set_src(img, ResourcePool::GetImage(img_src));
 
     lv_obj_t* label = lv_label_create(icon);
     lv_label_set_text(label, name);
@@ -392,6 +393,7 @@ void SystemInfosView::SetBattery(
 void SystemInfosView::SetStorage(
     const char* detect,
     const char* size,
+    const char* type,
     const char* version
 )
 {
@@ -399,9 +401,11 @@ void SystemInfosView::SetStorage(
         ui.storage.labelData,
         "%s\n"
         "%s\n"
+        "%s\n"
         "%s",
         detect,
         size,
+        type,
         version
     );
 }
